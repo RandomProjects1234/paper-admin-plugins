@@ -1,0 +1,29 @@
+name: Offend
+version: ${project.version}
+main: com.dma.offend.OffendPlugin
+api-version: "1.21"
+author: dma
+description: Temporary bans measured in minutes.
+commands:
+  offend:
+    description: Temporarily ban a player for a number of minutes
+    usage: /offend <player> <minutes> [reason]
+    permission: offend.use
+    permission-message: You don't have permission to offend players.
+  unoffend:
+    description: Pardon a temporarily banned player
+    usage: /unoffend <player>
+    permission: offend.use
+    permission-message: You don't have permission to pardon players.
+  offends:
+    description: List everyone currently temp-banned
+    usage: /offends
+    permission: offend.use
+    permission-message: You don't have permission to view bans.
+permissions:
+  offend.use:
+    description: Allows using /offend, /unoffend and /offends
+    default: op
+  offend.exempt:
+    description: Players with this permission cannot be offended
+    default: false

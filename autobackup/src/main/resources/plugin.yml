@@ -1,0 +1,16 @@
+name: AutoBackup
+version: ${project.version}
+main: com.dma.autobackup.AutoBackupPlugin
+api-version: "1.21"
+author: dma
+description: Backs up worlds and configs on a timer, or on demand with /savebackup.
+commands:
+  savebackup:
+    description: Back the server up right now
+    usage: /savebackup
+    permission: autobackup.savebackup
+    permission-message: You don't have permission to run a backup.
+permissions:
+  autobackup.savebackup:
+    description: Allows running a manual backup
+    default: op

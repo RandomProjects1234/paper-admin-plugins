@@ -1,0 +1,24 @@
+name: InvSee
+version: ${project.version}
+main: com.dma.invsee.InvSeePlugin
+api-version: "1.21"
+author: dma
+description: View and edit an online player's inventory or ender chest.
+commands:
+  invsee:
+    description: Open another player's inventory
+    usage: /invsee <player>
+    permission: invsee.use
+    permission-message: You don't have permission to view inventories.
+  endersee:
+    description: Open another player's ender chest
+    usage: /endersee <player>
+    permission: invsee.use
+    permission-message: You don't have permission to view ender chests.
+permissions:
+  invsee.use:
+    description: Allows opening another player's inventory
+    default: op
+  invsee.edit:
+    description: Allows changing items in a viewed inventory
+    default: op

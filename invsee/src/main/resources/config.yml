@@ -1,0 +1,3 @@
+# Force every view to be look-but-don't-touch, even for players who have invsee.edit.
+# Leave false to let admins move items in and out of the inventory they're viewing.
+read-only: false
