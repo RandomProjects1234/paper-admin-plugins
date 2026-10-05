@@ -5,7 +5,7 @@ Three small, self-contained admin plugins for a Paper Minecraft server. Built an
 
 | Plugin | What it does |
 | --- | --- |
-| **AutoBackup** | Zips the server on a timer and on demand, and prunes old archives |
+| **AutoBackup** | Zips the server only on demand with `/savebackup`, and prunes old archives |
 | **Offend** | Temporary bans measured in minutes |
 | **InvSee** | Opens another player's inventory or ender chest as a live view |
 
@@ -13,7 +13,10 @@ Three small, self-contained admin plugins for a Paper Minecraft server. Built an
 
 ## AutoBackup
 
-Backs the server up every 30 minutes, or whenever you run `/savebackup`.
+Backs the server up only when you run `/savebackup`. No automatic backups are scheduled.
+
+When upgrading, replace the old AutoBackup jar and restart the server. Any `interval-minutes`
+setting left in an existing config is ignored and can be removed.
 
 Archives land in `backups/` as `backup-YYYY-MM-DD_HH-mm-ss.zip`.
 
@@ -34,8 +37,7 @@ aren't being rewritten while they're read.
 
 ```yaml
 # config.yml
-interval-minutes: 30      # how often an automatic backup runs
-keep-backups: 48          # oldest archives beyond this are deleted (48 x 30min = ~1 day)
+keep-backups: 48          # oldest archives beyond this are deleted
 include-plugin-jars: true # configs in plugins/ are always included either way
 ```
 
@@ -107,9 +109,9 @@ mvn clean package
 Three jars come out of `*/target/`:
 
 ```
-autobackup/target/AutoBackup-1.0.0.jar
-offend/target/Offend-1.0.0.jar
-invsee/target/InvSee-1.0.0.jar
+autobackup/target/AutoBackup-1.0.1.jar
+offend/target/Offend-1.0.1.jar
+invsee/target/InvSee-1.0.1.jar
 ```
 
 Drop whichever ones you want into `plugins/` and restart. They're independent - none of them needs

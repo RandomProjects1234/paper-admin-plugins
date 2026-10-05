@@ -1,8 +1,5 @@
-# How often an automatic backup runs, in minutes.
-interval-minutes: 30
-
+# Backups run only when /savebackup is used.
 # How many archives to keep. The oldest are deleted once this many exist.
-# 48 at a 30 minute interval is about a day of history.
 keep-backups: 48
 
 # Include plugin .jar files in the archive. Turn off to save space if you can

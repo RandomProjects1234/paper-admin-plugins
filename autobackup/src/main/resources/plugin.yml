@@ -3,7 +3,7 @@ version: ${project.version}
 main: com.dma.autobackup.AutoBackupPlugin
 api-version: "1.21"
 author: dma
-description: Backs up worlds and configs on a timer, or on demand with /savebackup.
+description: Backs up worlds and configs only on demand with /savebackup.
 commands:
   savebackup:
     description: Back the server up right now

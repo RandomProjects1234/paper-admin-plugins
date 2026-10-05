@@ -28,7 +28,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * Backs the server up on a timer and on demand.
+ * Backs the server up on demand with /savebackup.
  *
  * <p>Only the things that are expensive to lose are archived: the world folders, the plugins
  * directory and the server's own config files. The server jar, caches, libraries and previous
@@ -66,13 +66,7 @@ public final class AutoBackupPlugin extends JavaPlugin {
         serverRoot = getDataFolder().toPath().toAbsolutePath().normalize().getParent().getParent();
         backupsDir = serverRoot.resolve("backups");
 
-        int intervalMinutes = Math.max(1, getConfig().getInt("interval-minutes", 30));
-        long periodTicks = intervalMinutes * 60L * 20L;
-        getServer().getScheduler().runTaskTimer(this,
-                () -> startBackup(getServer().getConsoleSender(), false), periodTicks, periodTicks);
-
-        getLogger().info("Enabled. Backing up every " + intervalMinutes
-                + " minutes, keeping the newest " + keepBackups + ". Manual backups: /savebackup");
+        getLogger().info("Enabled. Manual backups only: /savebackup. Keeping the newest " + keepBackups + ".");
     }
 
     private void reloadSettings() {
@@ -85,7 +79,7 @@ public final class AutoBackupPlugin extends JavaPlugin {
         if (!command.getName().equalsIgnoreCase("savebackup")) {
             return false;
         }
-        startBackup(sender, true);
+        startBackup(sender);
         return true;
     }
 
@@ -93,7 +87,7 @@ public final class AutoBackupPlugin extends JavaPlugin {
      * Kicks off a backup unless one is already running. Everything that touches the world must
      * happen on the main thread; the zip itself runs async.
      */
-    private void startBackup(CommandSender requester, boolean manual) {
+    private void startBackup(CommandSender requester) {
         if (!running.compareAndSet(false, true)) {
             message(requester, Component.text("A backup is already running.", NamedTextColor.YELLOW));
             return;
@@ -150,7 +144,7 @@ public final class AutoBackupPlugin extends JavaPlugin {
                     if (p != null && p.isOnline()) {
                         p.sendMessage(msg);
                     }
-                } else if (manual) {
+                } else {
                     Bukkit.getConsoleSender().sendMessage(msg);
                 }
             });
